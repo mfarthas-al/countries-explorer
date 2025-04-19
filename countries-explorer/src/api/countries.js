@@ -7,3 +7,9 @@ export const getAllCountries = async () => {
   if (!res.ok) throw new Error("Failed to fetch countries");
   return res.json();
 };
+
+export const getCountryByName = async (name) => {
+    const res = await fetch(`${BASE_URL}/name/${name}`);
+    if (!res.ok) throw new Error("Country not found");
+    return res.json();
+};
