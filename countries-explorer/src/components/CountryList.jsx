@@ -9,6 +9,8 @@ import SearchBar from "./SearchBar";
 import FiltersSidebar from "./FiltersSidebar";
 import { Globe, Loader } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useUser } from "../context/UserContext";
+import { Link } from "react-router-dom";
 
 const CountryList = () => {
   const [allCountries, setAllCountries] = useState([]);
@@ -23,6 +25,8 @@ const CountryList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const countriesPerPage = 20;
   const [isSearching, setIsSearching] = useState(false);
+
+  const { user, logout } = useUser();
 
   useEffect(() => {
     getAllCountries()
@@ -166,11 +170,34 @@ const CountryList = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm p-4">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <Link to="/" className="text-xl font-bold text-blue-600">
+          🌍 World Explorer
+        </Link>
+
+        <div className="flex items-center gap-4">
+          {user ? (
+            <>
+              <span className="text-sm text-gray-700">Welcome, {user.username}</span>
+              <Link to="/favorites" className="text-sm text-blue-600 underline hover:text-blue-800">Favorites</Link>
+              <button
+                onClick={logout}
+                className="text-sm text-red-600 underline hover:text-red-800"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link to="/login" className="text-sm text-blue-600 underline hover:text-blue-800">
+              Login
+            </Link>
+          )}
+        </div>
+      </div>
+    </header>
+
       <div className="mb-8 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 flex items-center justify-center">
-          <Globe className="mr-3 text-blue-600" />
-          World Explorer
-        </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Discover countries around the world, their flags, populations, and
           more.
