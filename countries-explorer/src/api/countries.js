@@ -19,3 +19,10 @@ export const getCountriesByRegion = async (region) => {
     if (!res.ok) throw new Error("Failed to fetch countries by region");
     return res.json();
 };
+
+export const getCountryByCode = async (code) => {
+  const res = await fetch(`${BASE_URL}/alpha/${code}`);
+  if (!res.ok) throw new Error("Failed to fetch country details");
+  const data = await res.json();
+  return data[0]; // API returns an array
+};

@@ -25,10 +25,11 @@ const FiltersSidebar = ({
     'spanish',
     'french',
     'arabic',
-    'portuguese',
     'russian',
     'chinese',
     'japanese',
+    'tamil',
+    'sinhala',
   ];
 
   return (

@@ -1,13 +1,13 @@
-import CountryList from "./components/CountryList";
+import { Routes, Route } from 'react-router-dom';
+import CountryList from './components/CountryList';
+import CountryDetail from './components/CountryDetail';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="text-center py-6 bg-white shadow">
-        <h1 className="text-4xl font-bold text-blue-600">🌍 Countries Explorer</h1>
-      </header>
-      <CountryList />
-    </div>
+    <Routes>
+      <Route path="/" element={<CountryList />} />
+      <Route path="/country/:code" element={<CountryDetail />} />
+    </Routes>
   );
 }
 
