@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { ChevronDown, ChevronUp, Filter, Check } from "lucide-react";

@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -27,16 +28,6 @@ const CountryCard = ({ country }) => {
       transition={{ duration: 0.3 }}
     >
       <div className="relative bg-white rounded-xl overflow-hidden shadow-md group transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1">
-        {/* ❤️ Favorite Toggle (top-right) */}
-        {user && (
-          <button
-            onClick={() => toggleFavorite(country.cca3)}
-            className="absolute bottom-2 right-2 z-10 text-red-500 hover:scale-110 transition"
-            title={isFavorite ? "Remove from favorites" : "Add to favorites"}
-          >
-            <Heart size={20} fill={isFavorite ? "currentColor" : "none"} />
-          </button>
-        )}
         {user && (
           <button
             onClick={() => toggleFavorite(country.cca3)}
