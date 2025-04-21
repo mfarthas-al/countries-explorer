@@ -54,3 +54,5 @@ Run all tests using:
 
 ```bash
 npm test
+
+deployment link: https://countries-explorer-x2w6.vercel.app/
