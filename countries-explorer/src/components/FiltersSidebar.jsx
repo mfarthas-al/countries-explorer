@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import { ChevronDown, ChevronUp, Filter } from 'lucide-react';
+import { useState } from "react";
+import PropTypes from "prop-types";
+import { ChevronDown, ChevronUp, Filter, Check } from "lucide-react";
 
 const FiltersSidebar = ({
   selectedRegions,
@@ -12,53 +12,37 @@ const FiltersSidebar = ({
   const [isLanguagesOpen, setIsLanguagesOpen] = useState(true);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  const regions = [
-    'africa',
-    'americas',
-    'asia',
-    'europe',
-    'oceania',
-  ];
+  const regions = ["africa", "americas", "asia", "europe", "oceania"];
 
   const languages = [
-    'english',
-    'spanish',
-    'french',
-    'arabic',
-    'russian',
-    'chinese',
-    'japanese',
-    'tamil',
-    'sinhala',
+    "english",
+    "spanish",
+    "french",
+    "arabic",
+    "russian",
+    "chinese",
+    "japanese",
+    "tamil",
+    "sinhala",
   ];
 
   return (
     <>
-      {/* Mobile Toggle Button */}
-      <div className="sm:hidden w-full mb-4">
-        <button
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="w-full flex items-center justify-between p-3 bg-white rounded-lg shadow-sm border border-gray-200 transition-colors duration-200 hover:bg-gray-50"
-        >
-          <span className="flex items-center text-gray-700 font-medium">
-            <Filter size={18} className="mr-2 text-blue-600" />
-            Filters
-          </span>
-          {isMobileOpen ? (
-            <ChevronUp size={18} className="text-gray-500" />
-          ) : (
-            <ChevronDown size={18} className="text-gray-500" />
-          )}
-        </button>
-      </div>
-
       {/* Sidebar Content */}
-      <div 
+      <div
         className={`bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 ease-in-out
-          ${isMobileOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 sm:max-h-[1000px] opacity-0 sm:opacity-100'}
+          ${
+            isMobileOpen
+              ? "max-h-[1000px] opacity-100"
+              : "max-h-0 sm:max-h-[1000px] opacity-0 sm:opacity-100"
+          }
           w-full sm:w-60 shrink-0`}
       >
         <div className="p-4">
+          <div className="flex items-center space-x-2 mb-6">
+            <Filter className="h-5 w-5 text-blue-600" />
+            <h2 className="text-lg font-semibold text-gray-800">Filters</h2>
+          </div>
           <div className="mb-4">
             <button
               onClick={() => setIsRegionsOpen(!isRegionsOpen)}
@@ -71,10 +55,12 @@ const FiltersSidebar = ({
                 <ChevronDown size={18} className="text-gray-500" />
               )}
             </button>
-            
-            <div className={`mt-2 space-y-1 transition-all duration-300 ease-in-out overflow-hidden ${
-              isRegionsOpen ? 'max-h-60' : 'max-h-0'
-            }`}>
+
+            <div
+              className={`mt-2 space-y-1 transition-all duration-300 ease-in-out overflow-hidden ${
+                isRegionsOpen ? "max-h-60" : "max-h-0"
+              }`}
+            >
               {regions.map((region) => (
                 <label
                   key={region}
@@ -106,10 +92,12 @@ const FiltersSidebar = ({
                 <ChevronDown size={18} className="text-gray-500" />
               )}
             </button>
-            
-            <div className={`mt-2 space-y-1 transition-all duration-300 ease-in-out overflow-hidden ${
-              isLanguagesOpen ? 'max-h-96' : 'max-h-0'
-            }`}>
+
+            <div
+              className={`mt-2 space-y-1 transition-all duration-300 ease-in-out overflow-hidden ${
+                isLanguagesOpen ? "max-h-96" : "max-h-0"
+              }`}
+            >
               {languages.map((language) => (
                 <label
                   key={language}
@@ -138,7 +126,7 @@ FiltersSidebar.propTypes = {
   selectedRegions: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedLanguages: PropTypes.arrayOf(PropTypes.string).isRequired,
   onToggleRegion: PropTypes.func.isRequired,
-  onToggleLanguage: PropTypes.func.isRequired
+  onToggleLanguage: PropTypes.func.isRequired,
 };
 
 export default FiltersSidebar;

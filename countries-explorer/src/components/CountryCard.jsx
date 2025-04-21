@@ -31,12 +31,26 @@ const CountryCard = ({ country }) => {
         {user && (
           <button
             onClick={() => toggleFavorite(country.cca3)}
-            className="absolute top-2 right-2 z-10 text-red-500 hover:scale-110 transition"
+            className="absolute bottom-2 right-2 z-10 text-red-500 hover:scale-110 transition"
             title={isFavorite ? "Remove from favorites" : "Add to favorites"}
           >
             <Heart size={20} fill={isFavorite ? "currentColor" : "none"} />
           </button>
         )}
+        {user && (
+          <button
+            onClick={() => toggleFavorite(country.cca3)}
+            className="absolute bottom-2 right-2 z-10 text-red-500 hover:scale-110 transition"
+            title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+          >
+            <Heart
+              size={20}
+              fill={isFavorite ? "currentColor" : "none"}
+              className="transition-transform duration-300 hover:scale-110"
+            />
+          </button>
+        )}
+
         <Link
           to={`/country/${country.cca3}`}
           className="block hover:shadow-lg transition"
@@ -52,7 +66,7 @@ const CountryCard = ({ country }) => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
 
-            <div className="p-4">
+            <div className="p-4 pb-6">
               <h3 className="font-bold text-gray-800 text-lg mb-2 line-clamp-1 transition-colors duration-300 group-hover:text-blue-600">
                 {country.name.common}
               </h3>
