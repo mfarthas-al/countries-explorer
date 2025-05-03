@@ -11,7 +11,6 @@ import FiltersSidebar from "./FiltersSidebar";
 import { Globe, Loader } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useUser } from "../context/UserContext";
-import { Link } from "react-router-dom";
 
 const CountryList = () => {
   const [allCountries, setAllCountries] = useState([]);
@@ -26,8 +25,6 @@ const CountryList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const countriesPerPage = 20;
   const [isSearching, setIsSearching] = useState(false);
-
-  const { user, logout } = useUser();
 
   useEffect(() => {
     getAllCountries()

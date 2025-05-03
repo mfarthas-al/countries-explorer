@@ -1,7 +1,15 @@
 import { getCountryByCode } from "../api/countries";
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Globe2, Users, MapPin, Flag, Languages, Map, ArrowLeft } from "lucide-react";
+import {
+  Globe2,
+  Users,
+  MapPin,
+  Flag,
+  Languages,
+  Map,
+  ArrowLeft,
+} from "lucide-react";
 
 const CountryDetail = () => {
   const { code } = useParams();
@@ -27,9 +35,16 @@ const CountryDetail = () => {
     return (
       <div className="text-center mt-12">
         <Globe2 className="mx-auto h-16 w-16 text-gray-400 mb-4" />
-        <h2 className="text-2xl font-semibold text-gray-700">Country not found</h2>
-        <p className="text-gray-500 mt-2">The country you're looking for doesn't exist in our database.</p>
-        <Link to="/" className="mt-6 inline-flex items-center text-blue-600 hover:text-blue-800">
+        <h2 className="text-2xl font-semibold text-gray-700">
+          Country not found
+        </h2>
+        <p className="text-gray-500 mt-2">
+          The country you're looking for doesn't exist in our database.
+        </p>
+        <Link
+          to="/"
+          className="mt-6 inline-flex items-center text-blue-600 hover:text-blue-800"
+        >
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to countries list
         </Link>
@@ -52,7 +67,10 @@ const CountryDetail = () => {
     timezones,
   } = country;
 
-  const mapUrl = `https://www.openstreetmap.org/export/embed.html?search=${country.capital?.[0] || country.name.common}`;
+  const [lat, lon] = country.latlng || [0, 0];
+  const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${
+    lon - 1
+  }%2C${lat - 1}%2C${lon + 1}%2C${lat + 1}&layer=mapnik&marker=${lat}%2C${lon}`;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -75,9 +93,15 @@ const CountryDetail = () => {
               />
             </div>
             <div className="p-6">
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">{name.common}</h1>
+              <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                {name.common}
+              </h1>
               <div className="grid grid-cols-2 gap-4">
-                <InfoItem icon={<MapPin />} label="Capital" value={capital?.[0] || "N/A"} />
+                <InfoItem
+                  icon={<MapPin />}
+                  label="Capital"
+                  value={capital?.[0] || "N/A"}
+                />
                 <InfoItem icon={<Globe2 />} label="Region" value={region} />
                 <InfoItem icon={<Map />} label="Subregion" value={subregion} />
                 <InfoItem
@@ -88,7 +112,9 @@ const CountryDetail = () => {
                 <InfoItem
                   icon={<Languages />}
                   label="Languages"
-                  value={languages ? Object.values(languages).join(", ") : "N/A"}
+                  value={
+                    languages ? Object.values(languages).join(", ") : "N/A"
+                  }
                 />
                 <InfoItem icon={<Flag />} label="Country Code" value={cca3} />
               </div>
@@ -96,12 +122,11 @@ const CountryDetail = () => {
           </div>
 
           <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-xl font-semibold mb-4">Additional Information</h2>
+            <h2 className="text-xl font-semibold mb-4">
+              Additional Information
+            </h2>
             <div className="grid grid-cols-2 gap-4">
-              <InfoItem
-                label="Area"
-                value={`${area.toLocaleString()} km²`}
-              />
+              <InfoItem label="Area" value={`${area.toLocaleString()} km²`} />
               <InfoItem
                 label="Currencies"
                 value={
